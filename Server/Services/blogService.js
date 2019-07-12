@@ -7,6 +7,7 @@ let _schema = new mongoose.Schema({
   slug: { type: String, unique: true, lowercase: true },//slug should be unique and lowercase
   summary: { type: String, maxlength: 120 },// no more than 120 characters
   author: { type: String, required: true },
+  //img: "https://placehold.it",
   body: { type: String, },
   tags: [{ type: String }]
 },
