@@ -4,12 +4,18 @@ import _blogService from '../Services/blogService'
 export default class BlogController {
   async getAllBlogs(req, res, next) {
     try {
+      if (req.query.tags || req.query.slug) {
+        return next()
+      }
       let allBlogs = await _blogService.find()
       res.send(allBlogs)
     } catch (error) { next(error) }
   }
   async getBlogByTag(req, res, next) {
     try {
+      if (req.query.slug) {
+        return next()
+      }
       let blogByTag = await _blogService.find({ tags: { $in: [req.query.tags] } })
       res.send(blogByTag)
     } catch (error) { next(error) }
@@ -53,9 +59,9 @@ export default class BlogController {
     this.router = express.Router()
       .post('', this.createBlog)
       .get('', this.getAllBlogs)
-      .get('/:blogId', this.getBlogById)
       .get('', this.getBlogByTag)
       .get('', this.getBlogBySlug)
+      .get('/:blogId', this.getBlogById)
       .put('/:blogId', this.editBlog)
       .delete('/:blogId', this.deleteBlog)
   }
