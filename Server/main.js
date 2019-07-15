@@ -2,7 +2,7 @@
 import express from 'express'
 import bp from 'body-parser'
 import './db/dbConfig'
-import BlogController from './Controllers/blogController.js';
+import BlogController from './Controllers/blogController';
 
 let port = 3000
 let server = express()
